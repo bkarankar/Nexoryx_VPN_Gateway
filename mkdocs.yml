@@ -1,0 +1,5 @@
+
+site_name: Nexoryx_VPN_Gateway
+nav:
+  - Home: README.md
+  - Architecture: docs/architecture.md

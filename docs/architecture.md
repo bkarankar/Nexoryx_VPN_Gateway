@@ -1,14 +1,3 @@
-# Architecture
+# Nexoryx_VPN_Gateway Architecture
 
-Remote Users
-      |
-+----------------+
-| VPN Gateway    |
-| WireGuard      |
-| OpenVPN        |
-+----------------+
-      |
-Internal Services
-
-Monitoring:
-Prometheus -> Grafana
+Production-grade infrastructure automation.
