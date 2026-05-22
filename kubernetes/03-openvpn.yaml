@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openvpn
+  namespace: nexoryx-vpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openvpn
+  template:
+    metadata:
+      labels:
+        app: openvpn
+    spec:
+      containers:
+      - name: openvpn
+        image: kylemanna/openvpn
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        ports:
+        - containerPort: 1194
+          protocol: UDP
+        readinessProbe:
+          tcpSocket:
+            port: 1194
+          initialDelaySeconds: 20
+        livenessProbe:
+          tcpSocket:
+            port: 1194
+          initialDelaySeconds: 60
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openvpn
+  namespace: nexoryx-vpn
+spec:
+  selector:
+    app: openvpn
+  ports:
+  - port: 1194
+    protocol: UDP
